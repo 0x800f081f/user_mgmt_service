@@ -1,0 +1,31 @@
+api:
+  insecure: true
+
+providers:
+  docker:
+    exposedByDefault: false
+
+entryPoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: proxy
+          scheme: https
+  proxy:
+    address: ":443"
+
+# ACME / Let's Encrypt Konfiguration
+# Hinweis: Die E-Mail-Adresse wird bewusst NICHT hier hinterlegt, da Traefik
+# Werte aus statischen Konfigurationsdateien nicht mit Umgebungsvariablen
+# ersetzt (kein Templating). Stattdessen wird sie in docker-compose.yml
+# über die Umgebungsvariable TRAEFIK_CERTIFICATESRESOLVERS_PROXY_ACME_EMAIL
+# gesetzt, welche von Traefik automatisch mit dieser statischen Konfiguration
+# zusammengeführt wird.
+certificatesResolvers:
+  proxy:
+    acme:
+      storage: /letsencrypt/acme.json
+      httpChallenge:
+        entryPoint: web

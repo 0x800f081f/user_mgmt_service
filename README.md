@@ -9,18 +9,17 @@ Spring 4.1 compliant app that demonstrates the authentication and authorization 
 - [x] Kein Hardcoding von Variablen – Konfiguration via ENV
 - [ ] Nur JAR im Runtime Image
 - [x] Non Root User
-- [ ] Keine kritischen Warnings seitens Hadolint (siehe nächste Folie
-
+- [ ] Keine kritischen Warnings seitens Hadolint (siehe nächste Folie)
 
 ## Aufgabe 2 Compose
 - [x] Persistentes Volume für PostgreSQL
 - [x] Datenbank nur via Service Name postgres erreichbar
 - [x] Verwendetes Image für PostgreSQL entspricht 16-alpine
 - [x] Spring Boot Backend startet lediglich, falls die Datenbank healthy ist
-- [ ] Netzwerk ist explizit definiert
-- [ ] Backend und Datenbank als zwei getrennte Services
-- [ ] Kein Hardcoding von Variablen – Konfiguration via ENV
-- [ ] Das .env ist im .gitingore aufgelistet
+- [x] Netzwerk ist explizit definiert
+- [x] Backend und Datenbank als zwei getrennte Services
+- [x] Kein Hardcoding von Variablen – Konfiguration via ENV
+- [x] Das .env ist im .gitingore aufgelistet
 
 ## Aufgabe 3 Reverse Proxy
 - [x] Traefik ist als seperater Service im docker-compose.yml definiert
@@ -30,11 +29,10 @@ Spring 4.1 compliant app that demonstrates the authentication and authorization 
 - [x] Datenbank ist nicht exponiert
 
 ## Aufgabe 4 TLS
-- [ ] TLS wird über Traefik mittels ACME (Let’s Encrypt) konfiguriert
-- [ ] Traefik stellt HTTP (80) und HTTPS (443) als EntryPoints bereit
-- [ ] TLS Terminierung erfolgt über Traefik
-- [ ] Zugriff auf das Backend erfolgt ausschliesslich über https://localhost/api. HTTP Traffic wird 
-automatisch auf HTTPS umgeleitet 
+- [x] TLS wird über Traefik mittels ACME (Let’s Encrypt) konfiguriert
+- [x] Traefik stellt HTTP (80) und HTTPS (443) als EntryPoints bereit
+- [x] TLS Terminierung erfolgt über Traefik
+- [x] Zugriff auf das Backend erfolgt ausschliesslich über https://localhost/api. HTTP Traffic wird automatisch auf HTTPS umgeleitet 
 
 ## Aufgabe 5 Deployment
 - [ ] Deployment erfolgt auf einem DigitalOcean Droplet (Linux VM)
@@ -48,6 +46,5 @@ automatisch auf HTTPS umgeleitet
 - [ ] Das Frontend wird als zusätzlicher Service in das bestehende Docker Compose integriert
 - [ ] Das Routing erfolgt über Traefik
 - [ ] Das Frontend ist über HTTPS erreichbar (falls möglich) und kommuniziert mit dem Backend
-- [ ] Die bestehende GitHub Actions Pipeline wird erweitert, sodass das Frontend gemeinsam mit den übrigen 
-Se[ ] rvices automatisch auf die Cloud Umgebung deployt wird
+- [ ] Die bestehende GitHub Actions Pipeline wird erweitert, sodass das Frontend gemeinsam mit den übrigen Services automatisch auf die Cloud Umgebung deployt wird
 - [ ] Über das Frontend können sich Benutzer registrieren und einloggen
