@@ -2,14 +2,14 @@ Spring 4.1 compliant app that demonstrates the authentication and authorization 
 
 # TODO
 ## Aufgabe 1 Dockerfile
-- [ ] ≤ 250 MB Runtime Image
-- [ ] JRE Base Image – kein JDK
+- [x] ≤ 250 MB Runtime Image
+- [x] JRE Base Image – kein JDK
 - [x] Multi Stage Build – Trennung Build und Runtime
-- [ ] Caching von Dependencies
+- [x] Caching von Dependencies
 - [x] Kein Hardcoding von Variablen – Konfiguration via ENV
-- [ ] Nur JAR im Runtime Image
+- [x] Nur JAR im Runtime Image
 - [x] Non Root User
-- [ ] Keine kritischen Warnings seitens Hadolint (siehe nächste Folie)
+- [x] Keine kritischen Warnings seitens Hadolint (siehe nächste Folie)
 
 ## Aufgabe 2 Compose
 - [x] Persistentes Volume für PostgreSQL
