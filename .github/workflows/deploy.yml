@@ -1,0 +1,66 @@
+name: Deploy
+
+# Trigger: run automatically on every push to main (acceptance criterion #2).
+on:
+  push:
+    branches: [main]
+
+# Avoid two deploys racing each other if pushes land close together.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@v1
+        # These become the shell env vars available inside `script:` below,
+        # via the `envs:` list. Each value comes from a GitHub Secret — never
+        # from the repo — so nothing secret is ever written to git.
+        env:
+          SPRING_DATASOURCE_URL: ${{ secrets.SPRING_DATASOURCE_URL }}
+          SPRING_DATASOURCE_USERNAME: ${{ secrets.SPRING_DATASOURCE_USERNAME }}
+          SPRING_DATASOURCE_PASSWORD: ${{ secrets.SPRING_DATASOURCE_PASSWORD }}
+          SPRING_JPA_HIBERNATE_DDL_AUTO: ${{ secrets.SPRING_JPA_HIBERNATE_DDL_AUTO }}
+          JWT_ISSUER: ${{ secrets.JWT_ISSUER }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          JWT_EXPIRATION_MILLIS: ${{ secrets.JWT_EXPIRATION_MILLIS }}
+          TRAEFIK_EMAIL: ${{ secrets.TRAEFIK_EMAIL }}
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_SSH_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          # t3.small + an on-server Gradle build can take a while — give it
+          # more room than the action's 10m default before giving up.
+          command_timeout: 20m
+          envs: SPRING_DATASOURCE_URL,SPRING_DATASOURCE_USERNAME,SPRING_DATASOURCE_PASSWORD,SPRING_JPA_HIBERNATE_DDL_AUTO,JWT_ISSUER,JWT_SECRET,JWT_EXPIRATION_MILLIS,TRAEFIK_EMAIL
+          script: |
+            set -e
+            cd ~/user_mgmt_service
+
+            # Pull the latest fixed docker-compose.yml / source before rebuilding.
+            git pull origin main
+
+            # Regenerate .env from the secrets passed in above. This file never
+            # lives in git — it's recreated fresh on the server on every deploy.
+            cat > .env <<ENVEOF
+            SPRING_DATASOURCE_URL=$SPRING_DATASOURCE_URL
+            SPRING_DATASOURCE_USERNAME=$SPRING_DATASOURCE_USERNAME
+            SPRING_DATASOURCE_PASSWORD=$SPRING_DATASOURCE_PASSWORD
+            SPRING_JPA_HIBERNATE_DDL_AUTO=$SPRING_JPA_HIBERNATE_DDL_AUTO
+            JWT_ISSUER=$JWT_ISSUER
+            JWT_SECRET=$JWT_SECRET
+            JWT_EXPIRATION_MILLIS=$JWT_EXPIRATION_MILLIS
+            TRAEFIK_EMAIL=$TRAEFIK_EMAIL
+            ENVEOF
+            chmod 600 .env
+
+            # Build the image on the server (per assignment wording) and
+            # (re)start the stack with the new code + config.
+            docker compose up -d --build
+
+            # Drop any dangling images left over from the previous build so
+            # the small root disk doesn't fill up over time.
+            docker image prune -f
