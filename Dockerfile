@@ -2,13 +2,15 @@
 # Stage 1: Build
 ########################################
 FROM alpine:3 AS build
-RUN apk update && apk add openjdk25 gradle
+
+# --no-cache installs without keeping the apk index in the image,
+# so there is no separate "apk update" and nothing to clean up later.
+# RUN apk update && apk add openjdk25-jre
+RUN apk add --no-cache openjdk25 gradle
 
 WORKDIR /app
 
 # Copy Gradle wrapper & build config first to leverage Docker layer caching
-COPY gradlew ./
-COPY gradle ./
 COPY build.gradle settings.gradle ./
 
 # Make wrapper executable and pre-fetch dependencies (cached unless build files change)
@@ -24,7 +26,8 @@ RUN gradle clean bootJar \
 # Stage 2: Runtime
 ########################################
 FROM alpine:3 AS runtime
-RUN apk update && apk add openjdk25-jre
+# RUN apk update && apk add openjdk25-jre
+RUN apk add --no-cache openjdk25-jre
 
 ARG APP_USER=spring
 ARG APP_UID=10001
@@ -33,8 +36,10 @@ ARG APP_HOME=/app
 ENV APP_HOME=${APP_HOME}
 
 # Create a dedicated, unprivileged system user/group to run the application
-RUN addgroup --system --gid "${APP_UID}" "${APP_USER}" \
-    && adduser --system --u "${APP_UID}" -s /usr/sbin/nologin "${APP_USER}"
+# RUN addgroup --system --gid "${APP_UID}" "${APP_USER}" \
+#     && adduser --system --u "${APP_UID}" -s /usr/sbin/nologin "${APP_USER}"
+RUN addgroup -g "${APP_UID}" -S "${APP_USER}" \
+    && adduser -S -D -H -u "${APP_UID}" -G "${APP_USER}" -s /sbin/nologin "${APP_USER}"
 
 WORKDIR ${APP_HOME}
 
