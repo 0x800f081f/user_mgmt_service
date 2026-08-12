@@ -6,7 +6,7 @@ services:
       - "--providers.docker=true"
       - "--configFile=/etc/traefik/traefik.yml"
     environment:
-      # Traefik führt Umgebungsvariablen automatisch mit der statischen
+      # Träfik führt Umgebungsvariablen automatisch mit der statischen
       # Konfigurationsdatei zusammen (Format: TRAEFIK_<PFAD_IN_GROSSBUCHSTABEN>)
       - "TRAEFIK_CERTIFICATESRESOLVERS_PROXY_ACME_EMAIL=${TRAEFIK_EMAIL}"
     ports:
