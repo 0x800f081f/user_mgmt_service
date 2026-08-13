@@ -35,11 +35,11 @@ Spring 4.1 compliant app that demonstrates the authentication and authorization 
 - [x] Zugriff auf das Backend erfolgt ausschliesslich über https://localhost/api. HTTP Traffic wird automatisch auf HTTPS umgeleitet 
 
 ## Aufgabe 5 Deployment
-- [ ] Deployment erfolgt auf einem DigitalOcean Droplet (Linux VM)
-- [ ] Deployment wird via GitHub Actions bei Push auf Main automatisch ausgelöst
-- [ ] Deployment erfolgt mittels Docker Compose via SSH auf das Droplet
-- [ ] Alle benötigten Secrets werden über GitHub Secrets verwaltet
-- [ ] Backend ist über öffentliche Domain oder IP erreichbar
+- [x] Deployment erfolgt auf einem DigitalOcean Droplet (Linux VM)
+- [x] Deployment wird via GitHub Actions bei Push auf Main automatisch ausgelöst
+- [x] Deployment erfolgt mittels Docker Compose via SSH auf das Droplet
+- [x] Alle benötigten Secrets werden über GitHub Secrets verwaltet
+- [x] Backend ist über öffentliche Domain oder IP erreichbar
 
 ## Aufgabe 6 Frontend
 - [ ] Das bereitgestellte Next.js Frontend wird mittels eines Dockerfiles containerisiert
