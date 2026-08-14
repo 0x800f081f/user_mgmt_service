@@ -28,6 +28,7 @@ jobs:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           JWT_EXPIRATION_MILLIS: ${{ secrets.JWT_EXPIRATION_MILLIS }}
           TRAEFIK_EMAIL: ${{ secrets.TRAEFIK_EMAIL }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_SSH_USER }}
@@ -54,6 +55,7 @@ jobs:
             JWT_SECRET=$JWT_SECRET
             JWT_EXPIRATION_MILLIS=$JWT_EXPIRATION_MILLIS
             TRAEFIK_EMAIL=$TRAEFIK_EMAIL
+            NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
             ENVEOF
             chmod 600 .env
 
