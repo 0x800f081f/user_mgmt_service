@@ -6,7 +6,7 @@ services:
       - "--providers.docker=true"
       - "--configFile=/etc/traefik/traefik.yml"
     environment:
-      # Träfik führt Umgebungsvariablen automatisch mit der statischen
+      # Traefik führt Umgebungsvariablen automatisch mit der statischen
       # Konfigurationsdatei zusammen (Format: TRAEFIK_<PFAD_IN_GROSSBUCHSTABEN>)
       - "TRAEFIK_CERTIFICATESRESOLVERS_PROXY_ACME_EMAIL=${TRAEFIK_EMAIL}"
     ports:
@@ -19,7 +19,7 @@ services:
       - ./traefik.yml:/etc/traefik/traefik.yml:ro
     depends_on:
       - backend
-
+      - frontend
 
   backend:
     build: .
@@ -31,12 +31,30 @@ services:
       - db
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.backend.rule=Host(`api.gardalus.ch`)"
+      - "traefik.http.routers.backend.rule=PathPrefix(`/api`)"
       - "traefik.http.routers.backend.entrypoints=proxy"
       - "traefik.http.routers.backend.tls=true"
       - "traefik.http.routers.backend.tls.certresolver=proxy"
       - "traefik.http.services.backend.loadbalancer.server.port=8080"
 
+  frontend:
+    build:
+      context: ./src-ui
+      dockerfile: Dockerfile
+      args:
+        # Die URL wird bereits beim Build benötigt.
+        NEXT_PUBLIC_API_URL: "${NEXT_PUBLIC_API_URL}"
+    environment:
+      - "NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}"
+    depends_on:
+      - backend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.frontend.entrypoints=proxy"
+      - "traefik.http.routers.frontend.tls=true"
+      - "traefik.http.routers.frontend.tls.certresolver=proxy"
+      - "traefik.http.services.frontend.loadbalancer.server.port=3000"
 
   db:
     image: postgres:16-alpine
