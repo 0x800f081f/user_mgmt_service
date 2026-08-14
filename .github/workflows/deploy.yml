@@ -36,7 +36,7 @@ jobs:
           # t3.small + an on-server Gradle build can take a while — give it
           # more room than the action's 10m default before giving up.
           command_timeout: 20m
-          envs: SPRING_DATASOURCE_URL,SPRING_DATASOURCE_USERNAME,SPRING_DATASOURCE_PASSWORD,SPRING_JPA_HIBERNATE_DDL_AUTO,JWT_ISSUER,JWT_SECRET,JWT_EXPIRATION_MILLIS,TRAEFIK_EMAIL
+          envs: SPRING_DATASOURCE_URL,SPRING_DATASOURCE_USERNAME,SPRING_DATASOURCE_PASSWORD,SPRING_JPA_HIBERNATE_DDL_AUTO,JWT_ISSUER,JWT_SECRET,JWT_EXPIRATION_MILLIS,TRAEFIK_EMAIL,NEXT_PUBLIC_API_URL
           script: |
             set -e
             cd ~/user_mgmt_service
