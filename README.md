@@ -42,9 +42,9 @@ Spring 4.1 compliant app that demonstrates the authentication and authorization 
 - [x] Backend ist über öffentliche Domain oder IP erreichbar
 
 ## Aufgabe 6 Frontend
-- [ ] Das bereitgestellte Next.js Frontend wird mittels eines Dockerfiles containerisiert
-- [ ] Das Frontend wird als zusätzlicher Service in das bestehende Docker Compose integriert
-- [ ] Das Routing erfolgt über Traefik
-- [ ] Das Frontend ist über HTTPS erreichbar (falls möglich) und kommuniziert mit dem Backend
-- [ ] Die bestehende GitHub Actions Pipeline wird erweitert, sodass das Frontend gemeinsam mit den übrigen Services automatisch auf die Cloud Umgebung deployt wird
+- [x] Das bereitgestellte Next.js Frontend wird mittels eines Dockerfiles containerisiert
+- [x] Das Frontend wird als zusätzlicher Service in das bestehende Docker Compose integriert
+- [x] Das Routing erfolgt über Traefik
+- [x] Das Frontend ist über HTTPS erreichbar (falls möglich) und kommuniziert mit dem Backend
+- [x] Die bestehende GitHub Actions Pipeline wird erweitert, sodass das Frontend gemeinsam mit den übrigen Services automatisch auf die Cloud Umgebung deployt wird
 - [ ] Über das Frontend können sich Benutzer registrieren und einloggen
