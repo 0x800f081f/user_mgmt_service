@@ -47,4 +47,4 @@ Spring 4.1 compliant app that demonstrates the authentication and authorization 
 - [x] Das Routing erfolgt über Traefik
 - [x] Das Frontend ist über HTTPS erreichbar (falls möglich) und kommuniziert mit dem Backend
 - [x] Die bestehende GitHub Actions Pipeline wird erweitert, sodass das Frontend gemeinsam mit den übrigen Services automatisch auf die Cloud Umgebung deployt wird
-- [ ] Über das Frontend können sich Benutzer registrieren und einloggen
+- [x] Über das Frontend können sich Benutzer registrieren und einloggen
