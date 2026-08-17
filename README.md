@@ -1,6 +1,6 @@
 # TODO
 ## Aufgabe 1
-- [ ] Die Docker Images sind in einer für den Kubernetes Cluster zugänglichen Container Registry gespeichert
+- [x] Die Docker Images sind in einer für den Kubernetes Cluster zugänglichen Container Registry gespeichert
 - [ ] Service sowie Deployment für Next Frontend, Spring Boot Backend und PostgreSQL Datenbank vorhanden
 - [ ] ConfigMap für die nicht sensitive Konfiguration vorhanden 
 - [ ] Secret für die sensitive Konfiguration vorhanden 

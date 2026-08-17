@@ -23,6 +23,7 @@ services:
 
   backend:
     build: .
+    image: ghcr.io/0x800f081f/user_mgmt_service-backend
     env_file:
       - .env
     depends_on:
@@ -46,6 +47,7 @@ services:
       args:
         # Die URL wird bereits beim Build benötigt.
         NEXT_PUBLIC_API_URL: "${NEXT_PUBLIC_API_URL}"
+    image: ghcr.io/0x800f081f/user_mgmt_service-frontend
     environment:
       - "NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}"
     depends_on:
