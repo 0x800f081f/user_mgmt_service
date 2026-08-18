@@ -3,10 +3,10 @@
 - [x] Die Docker Images sind in einer für den Kubernetes Cluster zugänglichen Container Registry gespeichert
 - [x] Service sowie Deployment für Next Frontend, Spring Boot Backend und PostgreSQL Datenbank vorhanden
 - [x] ConfigMap für die nicht sensitive Konfiguration vorhanden 
-- [ ] Secret für die sensitive Konfiguration vorhanden 
-- [ ] Die Datenbank verwendet eine persistente Speicherung mittels PersistentVolumeClaim 
-- [ ] Backend kommuniziert ausschliesslich über den Kubernetes Service mit der Datenbank
-- [ ] Ingress für den Zugriff auf das Frontend vorhanden und erreichbar
+- [x] Secret für die sensitive Konfiguration vorhanden 
+- [x] Die Datenbank verwendet eine persistente Speicherung mittels PersistentVolumeClaim 
+- [x] Backend kommuniziert ausschliesslich über den Kubernetes Service mit der Datenbank
+- [x] Ingress für den Zugriff auf das Frontend vorhanden und erreichbar
 
 ## Aufgabe 2
 - [ ] Helm Chart erstellt, Kubernetes Manifests templatisiert
